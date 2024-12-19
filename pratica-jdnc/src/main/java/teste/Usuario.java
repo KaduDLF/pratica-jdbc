@@ -13,6 +13,9 @@ public class Usuario {
     private String nome;
     private int idade;
     
+    public Usuario(){
+    }
+    
     public Usuario(String nome, int idade){
         this.nome = nome;
         this.idade = idade;
@@ -72,5 +75,77 @@ public class Usuario {
             }
         }
 
+    }
+    
+    public void alterar(int idSelect){
+        String sql = "UPDATE usuarios SET nome = ?, idade = ?"
+                + " WHERE id = ?";
+        
+        
+        PreparedStatement pstm = null;
+        
+        try {
+            Connection conexao = new Conexao().getConexao();
+            
+            pstm = conexao.prepareStatement(sql);
+            
+            pstm.setString(1, this.nome);
+            pstm.setInt(2, this.idade);
+            pstm.setInt(3, idSelect);
+            
+            pstm.execute();
+            
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            
+            try {
+                if( pstm != null){
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    
+    public void listar(){
+        String sql = "select * from usuarios";
+        
+        PreparedStatement pstm = null;
+        ResultSet rset = null;
+        
+        try {
+            Connection conexao = new Conexao().getConexao();
+            
+            pstm = conexao.prepareStatement(sql);
+            
+            rset = pstm.executeQuery();
+            
+            while(rset.next()){
+                System.out.println(rset.getInt("id"));
+                System.out.println(rset.getString("nome"));
+                System.out.println(rset.getInt("idade"));
+                System.out.println("===================");
+                
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                
+                if(rset != null){
+                    rset.close();
+                }
+                if(pstm != null){
+                    pstm.close();
+                }
+            } catch (SQLException e) {
+                
+                System.out.println(e.getMessage());
+                
+            }
+        }
     }
 }
