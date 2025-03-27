@@ -21,7 +21,7 @@ public class DesafioMatriz {
         g = scan.nextInt();
         int [][] matriz = new int [f][g];
         for(int i = 0;i<f;i++){
-            for(int j = 0;g<3;j++){
+            for(int j = 0;j<g;j++){
                 System.out.println("Digite um n");
                 matriz[i][j] = scan.nextInt();
             }            
