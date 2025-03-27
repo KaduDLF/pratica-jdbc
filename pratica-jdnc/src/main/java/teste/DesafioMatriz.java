@@ -20,8 +20,8 @@ public class DesafioMatriz {
         System.out.println("Digite o valor de colunas");
         g = scan.nextInt();
         int [][] matriz = new int [f][g];
-        for(int i = 0;i<3;i++){
-            for(int j = 0;j<3;j++){
+        for(int i = 0;i<f;i++){
+            for(int j = 0;g<3;j++){
                 System.out.println("Digite um n");
                 matriz[i][j] = scan.nextInt();
             }            
